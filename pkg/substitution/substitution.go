@@ -2,31 +2,38 @@ package substitution
 
 import (
 	"strings"
+	"unicode"
 )
 
 func Cipher(text string, key int) string {
-	byteText := []byte(text)
 	sb := strings.Builder{}
-	for _, symbol := range byteText {
-		symbol += byte(key)
-		if symbol > byte('z') {
-			sb.WriteByte(symbol - 26)
+	for _, symbol := range text {
+		if unicode.IsLetter(symbol) {
+			symbol += rune(key)
+			if unicode.ToLower(symbol) > 'z' {
+				sb.WriteRune(symbol - rune(26))
+			} else {
+				sb.WriteRune(symbol)
+			}
 		} else {
-			sb.WriteByte(symbol)
+			sb.WriteRune(symbol)
 		}
 	}
 	return sb.String()
 }
 
 func Decipher(text string, key int) string {
-	byteText := []byte(text)
 	sb := strings.Builder{}
-	for _, symbol := range byteText {
-		symbol -= byte(key)
-		if symbol < byte('a') {
-			sb.WriteByte(symbol + 26)
+	for _, symbol := range text {
+		if unicode.IsLetter(symbol) {
+			symbol -= rune(key)
+			if unicode.ToLower(symbol) < 'a' {
+				sb.WriteRune(symbol + rune(26))
+			} else {
+				sb.WriteRune(symbol)
+			}
 		} else {
-			sb.WriteByte(symbol)
+			sb.WriteRune(symbol)
 		}
 	}
 	return sb.String()
