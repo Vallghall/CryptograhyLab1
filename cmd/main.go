@@ -2,18 +2,20 @@ package main
 
 import (
 	replace "firstlab/pkg/replacement"
-	"flag"
+	subst "firstlab/pkg/substitution"
 	"fmt"
 )
 
 func main() {
-	key, inputText := parseFlags()
-	fmt.Println(replace.Cipher(inputText, key))
-}
-
-func parseFlags() (int, string) {
-	key := flag.Int("key", 5, "Sets the key for the substitution/replacement cipher")
-	txt := flag.String("text", "exampletxt", "Text for encoding")
-	flag.Parse()
-	return *key, *txt
+	configs := NewConfigs()
+	switch configs.method {
+	case 1:
+		fmt.Println(replace.Cipher(configs.txt, configs.key))
+	case 2:
+		if configs.decipher {
+			fmt.Println(subst.Decipher(configs.txt, configs.key))
+		} else {
+			fmt.Println(subst.Cipher(configs.txt, configs.key))
+		}
+	}
 }

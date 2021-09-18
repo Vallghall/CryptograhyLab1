@@ -1,4 +1,4 @@
-package replacement
+package matrix
 
 import "strings"
 
@@ -12,7 +12,7 @@ type matrix struct {
 	columns       int
 }
 
-func newMatrix(n int, key int) *matrix {
+func NewMatrix(n int, key int) *matrix {
 	rows := make([]row, getRowsQuantity(n, key))
 	return &matrix{
 		rows:    rows,
@@ -28,7 +28,7 @@ func getRowsQuantity(n, key int) int {
 	}
 }
 
-func (m *matrix) addToMatrix(symbol rune) {
+func (m *matrix) AddToMatrix(symbol rune) {
 	rows := m.rows
 	if m.currentColumn == m.columns {
 		m.currentColumn = 0
@@ -39,7 +39,7 @@ func (m *matrix) addToMatrix(symbol rune) {
 	m.size++
 }
 
-func (m matrix) transformMatrix() *matrix {
+func (m matrix) TransformMatrix() *matrix {
 	line := make([]rune, m.size)
 	newRow := make([]rune, m.columns)
 	newRows := make([]row, m.currentRow+1)

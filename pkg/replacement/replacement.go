@@ -1,21 +1,14 @@
 package replacement
 
-import "fmt"
+import (
+	table "firstlab/internal/matrix"
+	"fmt"
+)
 
 func Cipher(text string, key int) string {
-	matrix := newMatrix(len(text), key)
+	matrix := table.NewMatrix(len(text), key)
 	for _, symbol := range text {
-		matrix.addToMatrix(symbol)
+		matrix.AddToMatrix(symbol)
 	}
-	return fmt.Sprintln(matrix.transformMatrix())
+	return fmt.Sprintln(matrix.TransformMatrix())
 }
-
-/*
-func Decipher(text string, key int) string {
-	matrix := newMatrix(len(text))
-	for _, symbol := range text {
-		matrix.addToMatrix(symbol, key)
-	}
-	return fmt.Sprintln(matrix.transformMatrix(key))
-}
-*/
