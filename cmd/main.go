@@ -1,6 +1,7 @@
 package main
 
 import (
+	"firstlab/pkg/polygrammar"
 	"firstlab/pkg/replacement"
 	subst "firstlab/pkg/substitution"
 	"fmt"
@@ -20,6 +21,12 @@ func main() {
 			fmt.Println(subst.Decipher(configs.txt, configs.key))
 		} else {
 			fmt.Println(subst.Cipher(configs.txt, configs.key))
+		}
+	case 4:
+		if configs.decipher {
+			fmt.Println(polygrammar.Decipher(configs.txt, configs.key))
+		} else {
+			fmt.Println(polygrammar.Cipher(configs.txt, configs.key))
 		}
 	}
 }
