@@ -13,19 +13,26 @@ type matrix struct {
 }
 
 func NewMatrix(n int, key int) *matrix {
-	rows := make([]row, getRowsQuantity(n, key))
+	rows := make([]row, n/key)
 	return &matrix{
 		rows:    rows,
 		columns: key,
 	}
 }
 
-func getRowsQuantity(n, key int) int {
-	if n%key == 0 {
-		return n / key
-	} else {
-		return n / (key - 1)
+func (m *matrix) AddCipheredText(text string, key int) {
+	line := []rune(text)
+	rowsNumber := len(text) / key
+	newRow := make([]rune, m.columns)
+	newRows := make([]row, rowsNumber)
+	for i := 0; i < rowsNumber; i++ {
+		for j, n := i, 0; j < len(text); j, n = j+rowsNumber, n+1 {
+			newRow[n] = line[j]
+		}
+		newRows[i] = make([]rune, m.columns)
+		copy(newRows[i], newRow)
 	}
+	m.rows = newRows
 }
 
 func (m *matrix) AddToMatrix(symbol rune) {

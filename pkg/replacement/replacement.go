@@ -12,3 +12,9 @@ func Cipher(text string, key int) string {
 	}
 	return fmt.Sprintln(matrix.TransformMatrix())
 }
+
+func Decipher(text string, key int) string {
+	matrix := table.NewMatrix(len(text), key)
+	matrix.AddCipheredText(text, key)
+	return fmt.Sprintln(matrix)
+}
