@@ -10,7 +10,7 @@ func Cipher(text string, key int) string {
 	for _, symbol := range text {
 		if unicode.IsLetter(symbol) {
 			symbol += rune(key)
-			if unicode.ToLower(symbol) > 'z' {
+			if unicode.ToUpper(symbol) > 'Z' {
 				sb.WriteRune(symbol - rune(26))
 			} else {
 				sb.WriteRune(symbol)
@@ -27,7 +27,7 @@ func Decipher(text string, key int) string {
 	for _, symbol := range text {
 		if unicode.IsLetter(symbol) {
 			symbol -= rune(key)
-			if unicode.ToLower(symbol) < 'a' {
+			if unicode.ToUpper(symbol) < 'A' {
 				sb.WriteRune(symbol + rune(26))
 			} else {
 				sb.WriteRune(symbol)
