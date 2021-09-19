@@ -22,7 +22,7 @@ func main() {
 		} else {
 			fmt.Println(subst.Cipher(configs.txt, configs.key))
 		}
-	case 4:
+	case 3:
 		if configs.decipher {
 			fmt.Println(polygrammar.Decipher(configs.txt, configs.key))
 		} else {
